@@ -1,0 +1,27 @@
+.countdown {
+  display: flex;
+  gap: 2px;
+}
+
+.countdown__item {
+  background: var(--color__countdown-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+}
+
+.countdown__item-text {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.countdown__item-number {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+}
