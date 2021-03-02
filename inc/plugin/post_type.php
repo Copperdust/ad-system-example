@@ -95,17 +95,41 @@ class ElementorAdSystemPostType
     <style>
       .countdown-input {
         display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         gap: 10px;
       }
+
+      .countdown-input__date-container,
+      .countdown-input__time-container {
+        display: flex;
+        gap: 2px;
+      }
+
       .countdown-input__item {
-        max-width: 50px;
+        max-width: 55px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
+
+      .countdown-input__item--year {
+        max-width: 70px;
+      }
+
       .countdown-input__item input {
         width: 100%;
+      }
+
+      @media (max-width: 782px) {
+        .countdown-input__item {
+          max-width: 60px;
+        }
+
+        .countdown-input__item--year {
+          max-width: 75px;
+        }
       }
     </style>
     <table class="form-table" role="presentation">
@@ -122,21 +146,33 @@ class ElementorAdSystemPostType
         <th scope="row"><label for="countdown">Countdown</label></th>
         <td>
           <div class="countdown-input">
-            <div class="countdown-input__item">
-              <label for="countdown_days">Days</label>
-              <input type="number" name="countdown_days" value="<?php echo $store->countdown_days ?>" min="0">
+            <div class="countdown-input__date-container">
+              <div class="countdown-input__item countdown-input__item--year">
+                <label for="countdown_year">Year</label>
+                <input type="number" name="countdown_year" value="<?php echo $store->countdown_year ?: date('Y') ?>" min="<?php echo date('Y') ?>">
+              </div>
+              <div class="countdown-input__item">
+                <label for="countdown_month">Month</label>
+                <input type="number" name="countdown_month" value="<?php echo $store->countdown_month ?: date('m') ?>" min="1" max="12">
+              </div>
+              <div class="countdown-input__item">
+                <label for="countdown_day">Day</label>
+                <input type="number" name="countdown_day" value="<?php echo $store->countdown_day ?: date('d') ?>" min="1" max="31">
+              </div>
             </div>
-            <div class="countdown-input__item">
-              <label for="countdown_hours">Hours</label>
-              <input type="number" name="countdown_hours" value="<?php echo $store->countdown_hours ?>" min="0" max="24">
-            </div>
-            <div class="countdown-input__item">
-              <label for="countdown_mins">Mins</label>
-              <input type="number" name="countdown_mins" value="<?php echo $store->countdown_mins ?>" min="0" max="60">
-            </div>
-            <div class="countdown-input__item">
-              <label for="countdown_secs">Secs</label>
-              <input type="number" name="countdown_secs" value="<?php echo $store->countdown_secs ?>" min="0" max="60">
+            <div class="countdown-input__time-container">
+              <div class="countdown-input__item">
+                <label for="countdown_hour">Hour</label>
+                <input type="number" name="countdown_hour" value="<?php echo $store->countdown_hour ?: date('H') ?>" min="0" max="23">
+              </div>
+              <div class="countdown-input__item">
+                <label for="countdown_min">Min</label>
+                <input type="number" name="countdown_min" value="<?php echo $store->countdown_min ?: date('i') ?>" min="0" max="59">
+              </div>
+              <div class="countdown-input__item">
+                <label for="countdown_sec">Sec</label>
+                <input type="number" name="countdown_sec" value="<?php echo $store->countdown_sec ?: date('s') ?>" min="0" max="59">
+              </div>
             </div>
           </div>
         </td>
@@ -147,11 +183,6 @@ class ElementorAdSystemPostType
   public function save_custom_data($post_id)
   {
     $store = new ElementorAdSystemStore($post_id);
-
-    $store->template        = $_POST['template'];
-    $store->countdown_days  = $_POST['countdown_days'];
-    $store->countdown_hours = $_POST['countdown_hours'];
-    $store->countdown_mins  = $_POST['countdown_mins'];
-    $store->countdown_secs  = $_POST['countdown_secs'];
+    $store->save_all($_POST);
   }
 }
