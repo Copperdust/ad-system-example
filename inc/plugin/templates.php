@@ -10,6 +10,9 @@ class ElementorAdSystemTemplates
     $this->register_templates();
   }
 
+  /**
+   * Gets name+path from every php file in the plugins template folder
+   */
   public function get_templates_from_folder($path)
   {
     $entries = array();
@@ -23,13 +26,17 @@ class ElementorAdSystemTemplates
     return $entries;
   }
 
+  /**
+   * Registers custom templates into this class. Currently useless.
+   */
   public function register_templates()
   {
-    foreach ($this->plugin_templates as $name => $path) {
-      add_action('eas_render_template_' . $name, array($this, 'render'));
-    }
+    $this->custom_templates = apply_filters( 'eas_register_custom_templates', array() );
   }
 
+  /**
+   * Checks if the template name is registered as one of the plugin's available templates
+   */
   public function template_exists($check)
   {
     foreach ($this->plugin_templates as $name => $path) {
@@ -40,6 +47,9 @@ class ElementorAdSystemTemplates
     return false;
   }
 
+  /**
+   * Main function. Renders the template used by the ad that's related to the widget instantiating this class
+   */
   public function render($settings)
   {
     if (empty($settings['ad']))
@@ -49,11 +59,19 @@ class ElementorAdSystemTemplates
     $template = $store->template;
 
     if ($this->template_exists($template)) {
+      // Templates that come with the plugin by default
+
+      /**
+       * These variables are necessary for the "countdown" template.
+       *
+       * TODO: Make this section dynamic based on template. Unnecessary when there's only a single template.
+       */
       $datetime = $store->get_countdown_date_time();
       $diff = $datetime->diff(new DateTime('now'));
 
       require $this->plugin_templates[$template];
     } else {
+      // Custom templates
       do_action('eas_render_template_' . $template, $settings);
     }
   }

@@ -7,6 +7,11 @@ class ElementorAdSystem_Widget extends \Elementor\Widget_Base
   {
     parent::__construct($data, $args);
 
+    /**
+     * TODO: Instantiate different scripts and styles based on what template is being used.
+     *
+     * TODO: Do not instantiate any script or style if the template is overriden by the theme.
+     */
     wp_register_script('eas-script', ElementorAdSystem::plugins_url('/dist/main.js'), ['elementor-frontend'], '1.0.0', true);
     wp_register_style('eas-style', ElementorAdSystem::plugins_url('/dist/main.css'));
   }
