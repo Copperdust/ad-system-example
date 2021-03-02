@@ -41,10 +41,13 @@ class ElementorAdSystemStore
     return new WP_Error('invalid_set_property', "The requested property '$name' does not exist for " . __CLASS__);
   }
 
-  function save_all($POST)
+  /**
+   * This function will automatically save all properties based on an array of key/value items
+   */
+  function save_all($values)
   {
     foreach (self::$globalProperties as $prop) {
-      $this->{$prop} = $POST[$prop];
+      if ( isset( $values[$prop] ) ) $this->{$prop} = $values[$prop];
     }
   }
 }
