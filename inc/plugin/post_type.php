@@ -2,9 +2,11 @@
 
 class ElementorAdSystemPostType
 {
+  use Singleton;
+
   public static $post_type = 'as-ad';
 
-  function __construct()
+  function init()
   {
     add_action('init', array(__CLASS__, 'register_post_type'));
 

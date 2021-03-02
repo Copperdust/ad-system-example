@@ -84,11 +84,7 @@ class ElementorAdSystem_Widget extends \Elementor\Widget_Base
   {
     $settings = $this->get_settings_for_display();
 
-    $store = new ElementorAdSystemStore($settings['ad']);
-    $datetime = $store->get_countdown_date_time();
-    $diff = $datetime->diff( new DateTime('now') );
-
-    require 'template.php';
+    EAS()->Templates->render( $settings );
   }
 
   protected function _content_template()

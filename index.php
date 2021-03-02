@@ -10,7 +10,7 @@
 require_once plugin_dir_path(__FILE__) . "/inc/plugin/singleton.php";
 require_once plugin_dir_path(__FILE__) . "/inc/plugin/store.php";
 require_once plugin_dir_path(__FILE__) . "/inc/plugin/post_type.php";
-// require_once plugin_dir_path(__FILE__)."/inc/plugin/settings.php";
+require_once plugin_dir_path(__FILE__) . "/inc/plugin/templates.php";
 
 // require_once plugin_dir_path(__FILE__)."/vendor/RationalOptionPages/RationalOptionPages.php";
 
@@ -27,7 +27,8 @@ class ElementorAdSystem
     add_action('elementor/widgets/widgets_registered', [$this, 'register_widgets']);
 
     // Init post type
-    $this->PostType = new ElementorAdSystemPostType();
+    $this->PostType = ElementorAdSystemPostType::getInstance();
+    $this->Templates = ElementorAdSystemTemplates::getInstance();
   }
 
   /**
@@ -47,7 +48,7 @@ class ElementorAdSystem
    */
   public function register_widgets()
   {
-    require_once self::plugin_dir_path('/inc/widget/index.php');
+    require_once self::plugin_dir_path('/inc/plugin/widget.php');
     \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new ElementorAdSystem_Widget());
   }
 
@@ -69,3 +70,7 @@ class ElementorAdSystem
 }
 
 ElementorAdSystem::getInstance();
+
+function EAS() {
+  return ElementorAdSystem::getInstance();
+}
