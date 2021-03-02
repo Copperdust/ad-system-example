@@ -3,7 +3,7 @@
     <figure class="ad-system__image" style="background-image: url('<?php echo ElementorAdSystem::plugins_url('/static/images/player.png') ?>')"></figure>
     <div class="ad-system__center-wrapper">
       <div class="ad-system__countdown-wrapper">
-        <div class="countdown">
+        <div class="countdown" data-timestamp="<?php echo $timestamp ?>">
           <div class="countdown__item">
             <span class="countdown__item-text">DAYS</span>
             <span class="countdown__item-number">01</span>

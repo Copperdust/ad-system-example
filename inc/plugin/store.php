@@ -44,10 +44,15 @@ class ElementorAdSystemStore
   /**
    * This function will automatically save all properties based on an array of key/value items
    */
-  function save_all($values)
+  public function save_all($values)
   {
     foreach (self::$globalProperties as $prop) {
       if ( isset( $values[$prop] ) ) $this->{$prop} = $values[$prop];
     }
+  }
+
+  public function get_countdown_date_time()
+  {
+    return new DateTime( $this->countdown_year . '-' . $this->countdown_month . '-' . $this->countdown_day . ' ' . $this->countdown_hour . ':' . $this->countdown_minute . ':' . $this->countdown_second );
   }
 }
