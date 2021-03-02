@@ -8,11 +8,11 @@ You need to use two hooks for this:
 
 1.- "eas_register_custom_templates"
 
-This filter needs to get a list of names for custom templates. E.g.
+This filter needs to get a list of `slug => Name` for custom templates. E.g.
 
 ```
 add_filter('eas_register_custom_templates', function($templates) {
-  $templates[] = 'debug-settings';
+  $templates['debug-settings'] = 'Debug Settings';
   return $templates;
 });
 ```

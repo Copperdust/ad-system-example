@@ -6,24 +6,23 @@ class ElementorAdSystemTemplates
 
   function init()
   {
-    $this->plugin_templates = $this->get_templates_from_folder(ElementorAdSystem::plugin_dir_path('inc/templates'));
-    $this->register_templates();
+    add_action('init', array($this, 'register_templates'));
+  }
+
+  /**
+   * Returns all the possible template options for rendering in the post type metabox
+   */
+  public function get_possible_templates()
+  {
+    return array_merge($this->plugin_templates, $this->custom_templates);
   }
 
   /**
    * Gets name+path from every php file in the plugins template folder
    */
-  public function get_templates_from_folder($path)
+  public function get_path_from_template_name($name)
   {
-    $entries = array();
-    $d = dir($path);
-    while (false !== ($entry = $d->read())) {
-      if (preg_match('/\.php$/', $entry)) {
-        $entries[substr($entry, 0, -4)] = $path . '/' . $entry;
-      }
-    }
-    $d->close();
-    return $entries;
+    return ElementorAdSystem::plugin_dir_path('inc/templates') . '/' . $name . '.php';
   }
 
   /**
@@ -31,7 +30,11 @@ class ElementorAdSystemTemplates
    */
   public function register_templates()
   {
-    $this->custom_templates = apply_filters( 'eas_register_custom_templates', array() );
+    $this->plugin_templates = array(
+      'countdown' => 'Countdown',
+    );
+
+    $this->custom_templates = apply_filters('eas_register_custom_templates', array());
   }
 
   /**
@@ -69,7 +72,7 @@ class ElementorAdSystemTemplates
       $datetime = $store->get_countdown_date_time();
       $diff = $datetime->diff(new DateTime('now'));
 
-      require $this->plugin_templates[$template];
+      require $this->get_path_from_template_name($template);
     } else {
       // Custom templates
       do_action('eas_render_template_' . $template, $settings);

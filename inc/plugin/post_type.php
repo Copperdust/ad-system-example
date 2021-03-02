@@ -93,6 +93,8 @@ class ElementorAdSystemPostType
   public function render_meta_box($post)
   {
     $store = new ElementorAdSystemStore($post->ID);
+
+    $templates = EAS()->Templates->get_possible_templates();
 ?>
     <style>
       .countdown-input {
@@ -140,7 +142,9 @@ class ElementorAdSystemPostType
         <td>
           <select name="template" id="template">
             <?php self::option($store->template, '', 'Select a Template'); ?>
-            <?php self::option($store->template, 'countdown', 'Countdown'); ?>
+            <?php foreach( $templates as $value => $text ): ?>
+              <?php self::option($store->template, $value, $text); ?>
+            <?php endforeach; ?>
           </select>
         </td>
       </tr>
