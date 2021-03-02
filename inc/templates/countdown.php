@@ -56,7 +56,9 @@ if (is_a($obj, 'WP_Post') && $obj->post_type == 'post') {
     </div>
     <div class="ad-system__right-wrapper">
       <div class="ad-system__button-wrapper">
-        <button class="ad-system-button">BET & WIN</button>
+        <button class="ad-system-button">
+          <span class="ad-system-button__content" tabindex="-1">BET & WIN</span>
+        </button>
       </div>
       <div class="ad-system__trusted">Trusted Sportsbetting.ag</div>
     </div>

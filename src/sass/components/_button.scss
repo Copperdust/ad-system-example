@@ -1,4 +1,17 @@
 .ad-system-button {
+  width: auto;
+  height: auto;
+  padding: initial;
+  background: transparent;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.ad-system-button__content {
   font-family: 'Roboto Condensed', 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -13,8 +26,27 @@
   padding: 15px;
   display: grid;
   place-content: center center;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 100ms, box-shadow 100ms;
+  margin-bottom: 2px;
   &:hover {
-    text-decoration: none;
+    transform: translateY(1px);
+    box-shadow: 0px 1px 0px 0px rgba(139, 84, 13, 1);
+    background: linear-gradient(darken($color__button-top, 10%), darken($color__button-bottom, 10%));
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.3) inset;
   }
 }
 
+.ad-system-button:focus,
+.ad-system-button__content:focus {
+  outline: none;
+}
+
+.ad-system-button:focus > .ad-system-button__content {
+  outline-offset: 4px;
+  outline: 2px solid var(--color__title);
+}
