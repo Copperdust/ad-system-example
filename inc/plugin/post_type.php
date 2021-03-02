@@ -7,6 +7,7 @@ class ElementorAdSystemPostType
   function __construct()
   {
     add_action('init', array(__CLASS__, 'register_post_type'));
+
     add_action('add_meta_boxes', array(__CLASS__, 'add_meta_boxes'));
     add_action('save_post_' . self::$post_type, array(__CLASS__, 'save_custom_data'));
   }
@@ -69,10 +70,10 @@ class ElementorAdSystemPostType
 
   public static function add_meta_boxes()
   {
-    $screens = ['gas-ad'];
+    $screens = [self::$post_type];
     foreach ($screens as $screen) {
       add_meta_box(
-        'gas-ad-custom-fields',                 // Unique ID
+        self::$post_type . '-custom-fields',                 // Unique ID
         'Ad Options',      // Box title
         array(__CLASS__, "render_meta_box"),  // Content callback, must be of type callable
         $screen                            // Post type
