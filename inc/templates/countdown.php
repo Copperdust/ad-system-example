@@ -1,4 +1,26 @@
-<div class="ad-system">
+<?php
+$background_color = 'black';
+
+$obj = get_queried_object();
+if (is_a($obj, 'WP_Post') && $obj->post_type == 'post') {
+  $cats = get_categories();
+  foreach ($cats as $cat) {
+    switch ($cat->slug) {
+      case 'mlb':
+        $background_color = 'blue';
+        break;
+      case 'nba':
+        $background_color = 'orange';
+        break;
+      case 'nfl':
+        $background_color = 'black';
+        break;
+    }
+  }
+}
+?>
+
+<div class="ad-system ad-system--<?php echo $background_color ?>">
   <div class="ad-system__container">
     <figure class="ad-system__image" style="background-image: url('<?php echo ElementorAdSystem::plugins_url('/static/images/player.png') ?>')"></figure>
     <div class="ad-system__center-wrapper">
@@ -21,7 +43,9 @@
             <span class="countdown__item-number"><?php echo $diff->format('%s') ?></span>
           </div>
         </div>
-        <div class="ad-system__countdown-text">Remaining Time To Place Bet</div>
+        <div class="ad-system__countdown-text-wrapper">
+          <span class="ad-system__countdown-text">Remaining Time To Place Bet</span>
+        </div>
       </div>
       <div class="ad-system__text">
         <div class="ad-system__title"><?php echo $settings['title'] ?: 'Edit Me' ?></div>

@@ -14,17 +14,52 @@
   margin: 0 auto;
 }
 
+/**
+ * Black is the default theme
+ */
+// .ad-system--black {}
+
+.ad-system--blue {
+  --color__background: #17419c;
+  --color__foreground: #ffffff;
+  --color__countdown-background: #fe9917;
+  --color__countdown-foreground: #000000;
+  --color__title: #febd17;
+  --color__side-section: #4d4d4d;
+  --color__button-text: #000000;
+  --color__button-top: #febd17;
+  --color__button-bottom: #fe9917;
+}
+.ad-system--orange {
+  --color__background: #ffa500;
+  --color__foreground: #000000;
+  --color__countdown-background: #380eaa;
+  --color__countdown-foreground: #ffffff;
+  --color__title: #17419c;
+  --color__side-section: #adadad;
+  --color__button-text: #ffffff;
+  --color__button-top: #17419c;
+  --color__button-bottom: #380eaa;
+}
+
 .ad-system__container {
   display: flex;
   justify-content: space-between;
   padding-left: 150px;
   gap: 50px;
+  @media (max-width: 640px) {
+    flex-direction: column;
+    padding-left: 0;
+    gap: 0;
+  }
 }
 
 .ad-system__center-wrapper,
 .ad-system__right-wrapper {
   position: relative;
 }
+
+
 
 /**
  * Background
@@ -38,7 +73,12 @@
   right: 0;
   background-position: left;
   background-repeat: no-repeat;
+  @media (max-width: 640px) {
+    display: none;
+  }
 }
+
+
 
 /**
  * Middle section (countdown)
@@ -51,17 +91,42 @@
   flex-grow: 2;
   gap: 15px;
   padding: 10px 0 20px;
+  @media (max-width: 640px) {
+    padding: 20px;
+  }
 }
 
 .ad-system__countdown-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: 22px;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+
+.ad-system__countdown-text-wrapper {
+  display: grid;
+  place-content: center center;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100px;
+  @media (max-width: 640px) {
+    width: 100%;
+  }
 }
 
 .ad-system__countdown-text {
   font-weight: bold;
+}
+
+.countdown__item {
+  color: var(--color__countdown-foreground);
+}
+
+.ad-system__text {
+  @media (max-width: 640px) {
+    text-align: center;
+  }
 }
 
 .ad-system__title {
@@ -77,6 +142,8 @@
   line-height: 21/14 * 1em;
 }
 
+
+
 /**
  * Right section (CTA)
  */
@@ -91,6 +158,16 @@
   gap: 20px;
   background: var(--color__side-section);
   padding: 28px 30px 22px;
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.ad-system__button-wrapper {
+  @media (max-width: 640px) {
+    min-width: 220px;
+    margin: 0 auto;
+  }
 }
 
 .ad-system__trusted {
