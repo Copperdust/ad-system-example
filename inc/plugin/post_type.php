@@ -50,7 +50,7 @@ class ElementorAdSystemPostType
       'label' => __('Ad', 'elementor-ad-system'),
       'description' => __('', 'elementor-ad-system'),
       'labels' => $labels,
-      'menu_icon' => '',
+      'menu_icon' => 'dashicons-welcome-widgets-menus',
       'supports' => array('title'),
       'taxonomies' => array(),
       'public' => true,
