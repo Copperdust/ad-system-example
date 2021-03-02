@@ -142,7 +142,7 @@ class ElementorAdSystemPostType
         <td>
           <select name="template" id="template">
             <?php self::option($store->template, '', 'Select a Template'); ?>
-            <?php foreach( $templates as $value => $text ): ?>
+            <?php foreach ($templates as $value => $text) : ?>
               <?php self::option($store->template, $value, $text); ?>
             <?php endforeach; ?>
           </select>
