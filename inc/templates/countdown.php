@@ -48,7 +48,7 @@ if (is_a($obj, 'WP_Post') && $obj->post_type == 'post') {
         </div>
       </div>
       <div class="ad-system__text">
-        <div class="ad-system__title"><?php echo $settings['title'] ?: 'Edit Me' ?></div>
+        <div class="ad-system__title"><?php echo $settings['title'] ?: (is_admin() ? 'Edit Me' : '') ?></div>
         <div class="ad-system__encourage">
           Hurry Up! <b>25</b> people have placed this bet
         </div>
