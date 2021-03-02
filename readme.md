@@ -2,31 +2,6 @@
 
 This plugin creates a Elementor Block that allows the user to add countdown ads anywhere on the content. It is extensible to allow for theme developers to add other types of ads.
 
-# Extending templates
-
-You need to use two hooks for this:
-
-1. "eas_register_custom_templates"
-
-This filter needs to get a list of `slug => Name` for custom templates. E.g.
-
-```
-add_filter('eas_register_custom_templates', function($templates) {
-  $templates['debug-settings'] = 'Debug Settings';
-  return $templates;
-});
-```
-
-2. eas_render_template_[template]
-
-This hook is called when trying to render the registered template. E.g.
-
-```
-add_action('eas_render_template_debug-settings', function($settings) {
-  print_r($settings);
-});
-```
-
 # Getting Started
 
 ## Developing
@@ -69,6 +44,31 @@ Insert the widget from the Basic tab into the content. On the sidebar, there are
 
 1. Ad: This is the Ad we want this widget to represent, it's a drop down with search that lists all the Ads post type's titles ("Type")
 2. Title: This is the title that is applied to the individual instance of the widget
+
+### Extending templates
+
+You need to use two hooks for this:
+
+1. "eas_register_custom_templates"
+
+This filter needs to get a list of `slug => Name` for custom templates. E.g.
+
+```
+add_filter('eas_register_custom_templates', function($templates) {
+  $templates['debug-settings'] = 'Debug Settings';
+  return $templates;
+});
+```
+
+2. eas_render_template_[template]
+
+This hook is called when trying to render the registered template. E.g.
+
+```
+add_action('eas_render_template_debug-settings', function($settings) {
+  print_r($settings);
+});
+```
 
 # Decision Log
 
