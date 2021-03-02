@@ -74,6 +74,10 @@ class ElementorAdSystem_Widget extends \Elementor\Widget_Base
       ]
     );
 
+    /**
+     * TODO: Define extra fields base on ad selected
+     */
+
     $this->add_control(
       'title',
       [
