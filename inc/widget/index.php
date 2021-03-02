@@ -84,8 +84,9 @@ class ElementorAdSystem_Widget extends \Elementor\Widget_Base
   {
     $settings = $this->get_settings_for_display();
 
-    $store = new GuttenbergAdSystemStore($settings['ad']);
-    $timestamp = $store->get_countdown_date_time()->format('U');
+    $store = new ElementorAdSystemStore($settings['ad']);
+    $datetime = $store->get_countdown_date_time();
+    $diff = $datetime->diff( new DateTime('now') );
 
     require 'template.php';
   }
