@@ -138,7 +138,7 @@ class ElementorAdSystemPostType
     </style>
     <table class="form-table" role="presentation">
       <tr>
-        <th scope="row"><label for="template">Template</label></th>
+        <th scope="row"><label for="template">Template:</label></th>
         <td>
           <select name="template" id="template">
             <?php self::option($store->template, '', 'Select a Template'); ?>
@@ -149,7 +149,7 @@ class ElementorAdSystemPostType
         </td>
       </tr>
       <tr>
-        <th scope="row"><label for="countdown">Countdown</label></th>
+        <th scope="row" style="vertical-align:middle;"><label for="countdown">Countdown to date:</label></th>
         <td>
           <div class="countdown-input">
             <div class="countdown-input__date-container">
